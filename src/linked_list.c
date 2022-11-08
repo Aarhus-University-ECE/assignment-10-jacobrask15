@@ -39,18 +39,27 @@ void print_list(node *p) {
 int sum_squares(node *p) {
   // Add your code for excercise 2
   // You can find the tests in tests.cpp
-
-
-
-  return -1;
+  if (p == NULL) /*base case*/
+    return 0; /*nothing to be squared*/
+  else
+    return p->value * p->value + sum_squares(p->next);
 }
 
 typedef int (*fn_int_to_int)(int);
 
 node *map(node *p, fn_int_to_int f) { 
   // Add your code for excercise 3
-  
-  return NULL; 
+
+  node *temp = malloc(sizeof(node)); //use malloc to create new node in answer list
+
+  if (p == NULL) /* Base case */
+    return NULL; 
+  else 
+  {
+    temp->value = f(p->value); /* gives new node in answer list the correct value */
+    temp->next = map(p->next, f); /* will make the new node in answer list point to next node in answer list */
+    return temp; /* returns pointer to head of answer list */
+  } 
 }
 
 int square(int x) { return x * x; }
