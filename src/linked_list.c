@@ -24,8 +24,17 @@ void free_list(node *p) {
 
 /* print list to console */
 void print_list(node *p) {
-  // Add your code for exercise 1
-  // There is NO testcode for this
+  // Code for exercise 1
+  node *tempp = p; /*makes a temporary pointer so that head of list is not altered when using this function*/
+
+  if (tempp == NULL) /* base case */
+    return;
+  else /*print value and call function again with next element in list*/
+  {
+    printf("%d ", p->value);
+    tempp = tempp->next;
+    print_list(tempp);
+  }
 }
 
 int sum_squares(node *p) {
