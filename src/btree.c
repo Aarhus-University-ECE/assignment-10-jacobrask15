@@ -72,7 +72,8 @@ struct tree_node *Remove(int x, struct tree_node *t) {
   /*First find where x is*/
   while(kopit->item != x)
   {
-    if (x < kopit->item) /*x is further to the left*/
+    printf("--%d--", kopit->item);
+    if (x < kopit->item ) /*x is further to the left*/
     {
       kopit = kopit->left;
       temp2 = &((*temp2)->left);
@@ -94,23 +95,23 @@ struct tree_node *Remove(int x, struct tree_node *t) {
     *temp2 = NULL;
     free(kopit);
   }
-  if (kopit->left == NULL && kopit->right != NULL) /*x node should just be replaced with node to the right*/
+  else if (kopit->left == NULL && kopit->right != NULL) /*x node should just be replaced with node to the right*/
   {
     *temp2 = kopit->right;
     free(kopit);
   }
-  if (kopit->left != NULL && kopit->right == NULL) /*x node should just be replaced with node to the left*/
+  else if (kopit->left != NULL && kopit->right == NULL) /*x node should just be replaced with node to the left*/
   {
     *temp2 = kopit->left;
     free(kopit);
   }
-  if (kopit->left != NULL && kopit->right != NULL) /*x node should be replaced with the node containing the biggest number smaller than x*/
+  else if (kopit->left != NULL && kopit->right != NULL) /*x node should be replaced with the node containing the biggest number smaller than x*/
   {
     /*First find the node to replace node with x*/
     struct tree_node *kopit2 = kopit->left;
-    struct tree_node **temp3 = &kopit->left; 
+    struct tree_node **temp3 = &((*temp2)->left);
 
-    while (kopit2->right != NULL)
+    while (kopit2 != NULL || kopit2->right != NULL)
     {
       kopit2 = kopit2->right;
       temp3 = &((*temp3)->right);
@@ -147,7 +148,7 @@ int Contains(int x, struct tree_node *t) {
       }
       else
       {
-      Contains(x, t->left); /*if there is something left of root, call function with that as new root*/
+      return Contains(x, t->left); /*if there is something left of root, call function with that as new root*/
       }
     }
     else /* x is right of root*/
@@ -158,7 +159,7 @@ int Contains(int x, struct tree_node *t) {
       }
       else
       {
-        Contains(x, t->right);
+        return Contains(x, t->right);
       }
     }
   }
