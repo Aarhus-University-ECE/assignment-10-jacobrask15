@@ -72,7 +72,6 @@ struct tree_node *Remove(int x, struct tree_node *t) {
   /*First find where x is*/
   while(kopit->item != x)
   {
-    printf("--%d--", kopit->item);
     if (x < kopit->item ) /*x is further to the left*/
     {
       kopit = kopit->left;
@@ -111,7 +110,7 @@ struct tree_node *Remove(int x, struct tree_node *t) {
     struct tree_node *kopit2 = kopit->left;
     struct tree_node **temp3 = &((*temp2)->left);
 
-    while (kopit2 != NULL || kopit2->right != NULL)
+    while (kopit2->right != NULL)
     {
       kopit2 = kopit2->right;
       temp3 = &((*temp3)->right);
